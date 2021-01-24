@@ -29,10 +29,12 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddScoped<IDbConnection>(impl => new SqlConnection(connectionString));
-            services.AddScoped<IWeatherService, MTech.DapperSample.WeatherService>();
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");            
+            services.AddScoped<IWeatherService>(impl => new MTech.DapperSample.WeatherService(new SqlConnection(connectionString)));
 
+            connectionString = Configuration.GetConnectionString("TodoList");
+            services.AddScoped<ITodoService>(impl => new MTech.DapperSample.TodoService(new SqlConnection(connectionString)));
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
