@@ -15,6 +15,9 @@ using MTech;
 using System.Data.SqlClient;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using LinqToDB.Configuration;
+using LinqToDB.Data;
+using LinqToDB.AspNet;
 
 namespace TodoApi
 {
@@ -34,14 +37,26 @@ namespace TodoApi
             services.AddScoped<IWeatherService>(impl => new MTech.DapperSample.WeatherService(new SqlConnection(connectionString)));
 
             connectionString = Configuration.GetConnectionString("TodoList");
+            // Dapper
             //services.AddScoped<ITodoService>(impl => new MTech.DapperSample.TodoService(new SqlConnection(connectionString)));
-            services.AddDbContext<MTech.EFSample.TodoContext>(options =>
+            
+            // EFCore
+            //services.AddDbContext<MTech.EFSample.TodoContext>(options =>
+            //{
+            //    options.UseSqlServer(connectionString);
+            //});
+            //
+            //services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
+            
+            // Linq2Db
+            services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>
             {
                 options.UseSqlServer(connectionString);
             });
+            services.AddScoped<ITodoService, MTech.LinqToDBSample.TodoService>();
             
-            services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
-            
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
