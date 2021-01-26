@@ -2,7 +2,7 @@ namespace MTech.Domain
 {
     public class TodoItem
     {
-        public int Id { get; set; }
-        public string Title { get; set; } = null!;
+        public virtual int Id { get; set; }
+        public virtual string Title { get; set; } = null!;
     }
 }

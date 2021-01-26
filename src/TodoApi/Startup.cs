@@ -1,23 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MTech;
+using MTech.NHibernateSample;
 using System.Data.SqlClient;
-using System.Data;
-using Microsoft.EntityFrameworkCore;
-using LinqToDB.Configuration;
-using LinqToDB.Data;
-using LinqToDB.AspNet;
 
 namespace TodoApi
 {
@@ -33,13 +23,13 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");            
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddScoped<IWeatherService>(impl => new MTech.DapperSample.WeatherService(new SqlConnection(connectionString)));
 
             connectionString = Configuration.GetConnectionString("TodoList");
             // Dapper
             //services.AddScoped<ITodoService>(impl => new MTech.DapperSample.TodoService(new SqlConnection(connectionString)));
-            
+
             // EFCore
             //services.AddDbContext<MTech.EFSample.TodoContext>(options =>
             //{
@@ -47,15 +37,17 @@ namespace TodoApi
             //});
             //
             //services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
-            
-            // Linq2Db
-            services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>
-            {
-                options.UseSqlServer(connectionString);
-            });
-            services.AddScoped<ITodoService, MTech.LinqToDBSample.TodoService>();
-            
 
+            // Linq2Db
+            //services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>
+            //{
+            //    options.UseSqlServer(connectionString);
+            //});
+            //services.AddScoped<ITodoService, MTech.LinqToDBSample.TodoService>();
+
+            // NHibernate
+            services.AddNHibernate(connectionString);
+            services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

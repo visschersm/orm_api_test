@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NHibernateSample\NHibernateSample.csproj" />
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
     <ProjectReference Include="..\WeatherForecastSample\WeatherForecastSample.csproj" />
     <ProjectReference Include="..\DapperSample\DapperSample.csproj" />
