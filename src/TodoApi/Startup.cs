@@ -6,8 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MTech;
-using MTech.NHibernateSample;
+using SD.LLBLGen.Pro.DQE.SqlServer;
+using SD.LLBLGen.Pro.ORMSupportClasses;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace TodoApi
 {
@@ -46,8 +48,17 @@ namespace TodoApi
             //services.AddScoped<ITodoService, MTech.LinqToDBSample.TodoService>();
 
             // NHibernate
-            services.AddNHibernate(connectionString);
-            services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
+            //services.AddNHibernate(connectionString);
+            //services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
+
+            // LLBLGen
+            RuntimeConfiguration.AddConnectionString("ConnectionString.SQL Server (SqlClient)", connectionString);
+            RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
+                                c => c.SetTraceLevel(TraceLevel.Verbose)
+                                        .AddDbProviderFactory(typeof(System.Data.SqlClient.SqlClientFactory))
+                                        .SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012));
+
+            services.AddScoped<ITodoService, MTech.LLBLGenSample.TodoService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
