@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+	<TargetFramework>net5.0</TargetFramework>
+	<RootNamespace>MTech</RootNamespace>
+	<AssemblyName>MTech.ServiceLayer</AssemblyName>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
 
 </Project>

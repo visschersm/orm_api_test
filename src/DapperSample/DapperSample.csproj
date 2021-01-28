@@ -11,6 +11,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>MTech.DapperSample</AssemblyName>
+    <RootNamespace>MTech.DapperSample</RootNamespace>
   </PropertyGroup>
 
 </Project>

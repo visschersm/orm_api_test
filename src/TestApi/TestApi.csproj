@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>MTech.TestApi</AssemblyName>
+    <RootNamespace>MTech.TestApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
     <ProjectReference Include="..\LLBLGenSample\LLBLGenSample.csproj" />
     <ProjectReference Include="..\NHibernateSample\NHibernateSample.csproj" />
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />

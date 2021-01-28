@@ -1,7 +1,5 @@
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using MTech.Domain;
-using MTech;
 using System.Collections.Generic;
 
 namespace MTech.TodoApi.Controllers
@@ -11,12 +9,9 @@ namespace MTech.TodoApi.Controllers
     public class TodoController : ControllerBase
     {
         private readonly ITodoService _todoService;
-        private readonly ILogger<TodoController> _logger;
 
-        public TodoController(
-            ILogger<TodoController> logger,
-            ITodoService todoService
-        ) => (_logger, _todoService) = (logger, todoService);
+        public TodoController(ITodoService todoService)
+            => _todoService = todoService;
 
         [HttpGet]
         public IList<TodoItem> GetList()

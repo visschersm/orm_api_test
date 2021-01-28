@@ -1,6 +1,6 @@
-﻿using DomainLayer;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MTech.Domain;
 
 namespace MTech.EFSample.AnimalContextConfigurations
 {

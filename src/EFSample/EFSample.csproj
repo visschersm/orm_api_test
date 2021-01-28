@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>MTech.EFSample</AssemblyName>
+    <RootNamespace>MTech.EFSample</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

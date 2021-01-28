@@ -26,12 +26,15 @@ namespace TodoApi
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var animalFarmConnectionString = Configuration.GetConnectionString("AnimalFarm");
+
             services.AddScoped<IWeatherService>(impl => new MTech.DapperSample.WeatherService(new SqlConnection(connectionString)));
 
             connectionString = Configuration.GetConnectionString("TodoList");
             // Dapper
             //services.AddScoped<ITodoService>(impl => new MTech.DapperSample.TodoService(new SqlConnection(connectionString)));
 
+            services.AddScoped<IAnimalService>(implementationFactory => new MTech.DapperSample.AnimalService(new SqlConnection(animalFarmConnectionString)));
             // EFCore
             //services.AddDbContext<MTech.EFSample.TodoContext>(options =>
             //{
@@ -39,6 +42,13 @@ namespace TodoApi
             //});
             //
             //services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
+
+            //services.AddDbContext<MTech.EFSample.AnimalContext>(options =>
+            //{
+            //    options.UseSqlServer(animalFarmConnectionString);
+            //});
+            //
+            //services.AddScoped<IAnimalService, MTech.EFSample.AnimalService>();
 
             // Linq2Db
             //services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>

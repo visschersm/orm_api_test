@@ -1,8 +1,8 @@
-﻿using DomainLayer;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using MTech.Domain;
 using System.Reflection;
 
-namespace EFSample
+namespace MTech.EFSample
 {
     public class AnimalContext : DbContext
     {

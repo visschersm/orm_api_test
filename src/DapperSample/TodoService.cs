@@ -1,8 +1,7 @@
-using MTech;
+using Dapper;
 using MTech.Domain;
 using System.Collections.Generic;
 using System.Data;
-using Dapper;
 using System.Linq;
 
 namespace MTech.DapperSample
@@ -15,7 +14,8 @@ namespace MTech.DapperSample
 
         public IList<TodoItem> GetAll()
         {
-            return _connection.Query<TodoItem>("SELECT * from TodoItem").ToList();
+            return _connection.Query<TodoItem>("SELECT * from TodoItem")
+                .ToList();
         }
 
         public TodoItem GetById(int id)
