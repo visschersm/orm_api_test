@@ -13,6 +13,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>MTech.DapperSample</AssemblyName>
     <RootNamespace>MTech.DapperSample</RootNamespace>
+    <Configurations>Debug;Release;Dapper - Debug</Configurations>
   </PropertyGroup>
 
 </Project>

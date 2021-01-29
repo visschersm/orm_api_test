@@ -29,7 +29,7 @@ namespace MTech.NHibernateSample
 
             services.AddSingleton(sessionFactory);
             services.AddScoped(factory => sessionFactory.OpenSession());
-            services.AddScoped<NHContext>();
+            services.AddScoped<TodoContext>();
 
             return services;
         }

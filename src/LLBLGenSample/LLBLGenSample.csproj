@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;Dapper - Debug</Configurations>
+    <AssemblyName>MTech.LLBLGenSample</AssemblyName>
+    <RootNamespace>MTech.LLBLGenSample</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

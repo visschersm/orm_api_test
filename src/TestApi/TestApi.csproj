@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>MTech.TestApi</AssemblyName>
     <RootNamespace>MTech.TestApi</RootNamespace>
+    <Configurations>Debug;Release;Dapper - Debug</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

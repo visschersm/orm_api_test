@@ -1,3 +1,4 @@
+using LinqToDB.AspNet;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,8 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MTech;
+using MTech.NHibernateSample;
 using SD.LLBLGen.Pro.DQE.SqlServer;
 using SD.LLBLGen.Pro.ORMSupportClasses;
+using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -15,60 +18,73 @@ namespace TodoApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
+
+        private readonly IWebHostEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var todoListConnectionString = Configuration.GetConnectionString("TodoList");
             var animalFarmConnectionString = Configuration.GetConnectionString("AnimalFarm");
 
-            services.AddScoped<IWeatherService>(impl => new MTech.DapperSample.WeatherService(new SqlConnection(connectionString)));
+            switch (Environment.GetEnvironmentVariable("ORM"))
+            {
+                case "Dapper":
+                    services.AddScoped<IWeatherService>(impl => new MTech.DapperSample.WeatherService(new SqlConnection(connectionString)));
+                    services.AddScoped<ITodoService>(impl => new MTech.DapperSample.TodoService(new SqlConnection(todoListConnectionString)));
+                    services.AddScoped<IAnimalService>(implementationFactory => new MTech.DapperSample.AnimalService(new SqlConnection(animalFarmConnectionString)));
+                    break;
+                case "EFCore":
+                    services.AddDbContext<MTech.EFSample.TodoContext>(options =>
+                    {
+                        options.UseSqlServer(todoListConnectionString);
+                    });
 
-            connectionString = Configuration.GetConnectionString("TodoList");
-            // Dapper
-            //services.AddScoped<ITodoService>(impl => new MTech.DapperSample.TodoService(new SqlConnection(connectionString)));
+                    services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
 
-            services.AddScoped<IAnimalService>(implementationFactory => new MTech.DapperSample.AnimalService(new SqlConnection(animalFarmConnectionString)));
-            // EFCore
-            //services.AddDbContext<MTech.EFSample.TodoContext>(options =>
-            //{
-            //    options.UseSqlServer(connectionString);
-            //});
-            //
-            //services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
+                    services.AddDbContext<MTech.EFSample.AnimalContext>(options =>
+                    {
+                        options.UseSqlServer(animalFarmConnectionString);
+                    });
 
-            //services.AddDbContext<MTech.EFSample.AnimalContext>(options =>
-            //{
-            //    options.UseSqlServer(animalFarmConnectionString);
-            //});
-            //
-            //services.AddScoped<IAnimalService, MTech.EFSample.AnimalService>();
+                    services.AddScoped<IAnimalService, MTech.EFSample.AnimalService>();
+                    break;
+                case "Linq2Db":
+                    services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>
+                    {
+                        options.UseSqlServer(todoListConnectionString);
+                    });
+                    services.AddScoped<ITodoService, MTech.LinqToDBSample.TodoService>();
 
-            // Linq2Db
-            //services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>
-            //{
-            //    options.UseSqlServer(connectionString);
-            //});
-            //services.AddScoped<ITodoService, MTech.LinqToDBSample.TodoService>();
+                    services.AddLinqToDbContext<MTech.LinqToDBSample.AnimalConnection>((provider, options) =>
+                    {
+                        options.UseSqlServer(animalFarmConnectionString);
+                    });
+                    break;
+                case "NHibernate":
+                    services.AddNHibernate(todoListConnectionString);
+                    services.AddNHibernate(animalFarmConnectionString);
+                    services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
+                    services.AddScoped<IAnimalService, MTech.NHibernateSample.AnimalService>();
+                    break;
+                case "LLBLGen":
+                    RuntimeConfiguration.AddConnectionString("ConnectionString.SQL Server (SqlClient)", connectionString);
+                    RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
+                                        c => c.SetTraceLevel(TraceLevel.Verbose)
+                                                .AddDbProviderFactory(typeof(System.Data.SqlClient.SqlClientFactory))
+                                                .SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012));
 
-            // NHibernate
-            //services.AddNHibernate(connectionString);
-            //services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
-
-            // LLBLGen
-            RuntimeConfiguration.AddConnectionString("ConnectionString.SQL Server (SqlClient)", connectionString);
-            RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
-                                c => c.SetTraceLevel(TraceLevel.Verbose)
-                                        .AddDbProviderFactory(typeof(System.Data.SqlClient.SqlClientFactory))
-                                        .SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012));
-
-            services.AddScoped<ITodoService, MTech.LLBLGenSample.TodoService>();
+                    services.AddScoped<ITodoService, MTech.LLBLGenSample.TodoService>();
+                    break;
+            }
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

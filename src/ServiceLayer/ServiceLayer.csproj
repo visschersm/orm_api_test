@@ -4,6 +4,7 @@
 	<TargetFramework>net5.0</TargetFramework>
 	<RootNamespace>MTech</RootNamespace>
 	<AssemblyName>MTech.ServiceLayer</AssemblyName>
+	<Configurations>Debug;Release;Dapper - Debug</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

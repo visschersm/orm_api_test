@@ -6,10 +6,10 @@ namespace MTech.NHibernateSample
 {
     public class TodoService : ITodoService
     {
-        private readonly NHContext _context;
+        private readonly TodoContext _context;
 
         //public TodoService(ISessionFactory sessionFactory) => _sessionFactory = sessionFactory;
-        public TodoService(NHContext context)
+        public TodoService(TodoContext context)
             => _context = context;
 
         public void Create(TodoItem item)

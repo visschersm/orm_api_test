@@ -1,7 +1,5 @@
-using MTech;
-using MTech.Domain;
 using LinqToDB;
-using LinqToDB.Common;
+using MTech.Domain;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +15,7 @@ namespace MTech.LinqToDBSample
         public IList<TodoItem> GetAll()
         {
             return _connection.TodoItem
-                .Select(item => new TodoItem 
+                .Select(item => new TodoItem
                 {
                     Id = item.Id,
                     Title = item.Title
@@ -29,7 +27,7 @@ namespace MTech.LinqToDBSample
         {
             return _connection.TodoItem
                 .Where(item => item.Id == id)
-                .Select(item => new TodoItem 
+                .Select(item => new TodoItem
                 {
                     Id = item.Id,
                     Title = item.Title

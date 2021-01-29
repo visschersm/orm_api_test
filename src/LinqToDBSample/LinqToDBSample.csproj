@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>MTech.LinqToDBSample</AssemblyName>
+    <RootNamespace>MTech.LinqToDBSample</RootNamespace>
+    <Configurations>Debug;Release;Dapper - Debug</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

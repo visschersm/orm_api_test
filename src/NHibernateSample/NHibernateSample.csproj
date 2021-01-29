@@ -2,15 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;Dapper - Debug</Configurations>
+    <AssemblyName>MTech.NHibernateSample</AssemblyName>
+    <RootNamespace>MTech.NHibernateSample</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Mapping\TodoItem.hbm.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Mapping\TodoItem.hbm.xml" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />

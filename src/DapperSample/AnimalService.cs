@@ -16,19 +16,16 @@ namespace MTech.DapperSample
 
         public void Create(Animal animal)
         {
-            if (animal is Dog)
+            var sql = $"DECLARE @p2 int; " +
+                    $"INSERT INTO Animal ([NAME], [Type]) VALUES('{animal.Name}', {animal.Type});";
+
+            if (animal.GetType().IsSubclassOf(typeof(Animal)))
             {
-                var subSql = $"DECLARE @p2 int; " +
-                    $"INSERT INTO Animal ([NAME], [Type]) VALUES('{animal.Name}', {animal.Type}); " +
-                    $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " +
-                    $" INSERT INTO Dog ([Id]) VALUES(@p2)";
-                _connection.Execute(subSql);
+                sql += $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " +
+                    $"INSERT INTO [{animal.GetType().Name}] ([Id]) VALUES(@p2)";
             }
-            else
-            {
-                var sql = $"INSERT INTO Animal (Name, Type) VALUES('{animal.Name}', {animal.Type})";
-                _connection.Execute(sql);
-            }
+
+            _connection.Execute(sql);
         }
 
         public void Delete(int id)

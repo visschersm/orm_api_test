@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace MTech.NHibernateSample
 {
-    public class NHContext
+    public class TodoContext
     {
         private readonly ISession _session;
         private ITransaction _transaction;
 
-        public NHContext(ISession session)
+        public TodoContext(ISession session)
             => _session = session;
 
         public IQueryable<TodoItem> TodoItem => _session.Query<TodoItem>();
