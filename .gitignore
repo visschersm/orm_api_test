@@ -1,6 +1,6 @@
 [Bb]in
 [Oo]bj
 appsettings.json
-src/TodoApi/appsettings.Development.json
+appsettings.Development.json
 *.suo
 /.vs

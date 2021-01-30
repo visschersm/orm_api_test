@@ -17,7 +17,7 @@ namespace MTech.DapperSample
         public void Create(Animal animal)
         {
             var sql = $"DECLARE @p2 int; " +
-                    $"INSERT INTO Animal ([NAME], [Type]) VALUES('{animal.Name}', {animal.Type});";
+                    $"INSERT INTO [Animal] ([NAME], [Type]) VALUES('{animal.Name}', {animal.Type});";
 
             if (animal.GetType().IsSubclassOf(typeof(Animal)))
             {
@@ -26,6 +26,26 @@ namespace MTech.DapperSample
             }
 
             _connection.Execute(sql);
+        }
+
+        public void Create(Dog dog)
+        {
+            var sql = $"DECLARE @p2 int; " +
+                $"INSERT INTO [Animal] (NAME], [TYPE]) VALUES('{dog.Name}', {dog.Type}); " +
+                $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " + 
+                $"INSERT INTO [Dog] ([Id]) VALUES(@p2);";
+
+                _connection.Execute(sql);
+        }
+
+        public void Create(Cow cow)
+        {
+            var sql = $"DECLARE @p2 int; " +
+                $"INSERT INTO [Animal] (NAME], [TYPE]) VALUES('{cow.Name}', {cow.Type}); " +
+                $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " + 
+                $"INSERT INTO [Cow] ([Id]) VALUES(@p2);";
+
+                _connection.Execute(sql);
         }
 
         public void Delete(int id)

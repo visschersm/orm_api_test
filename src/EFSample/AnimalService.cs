@@ -34,7 +34,30 @@ namespace MTech.EFSample
 
         public void Create(Animal animal)
         {
-            _context.Animal.Add(animal);
+            // TODO: Check if we cannot just use the add method.
+
+            if (animal.GetType().IsSubclassOf(typeof(Animal)))
+            {
+                // _context.Set<TypeOf(animal)>().Add(animal);
+                _context.Add(animal);
+            }
+            else
+            {
+                _context.Animal.Add(animal);    
+            }
+            
+            _context.SaveChanges();
+        }
+
+        public void Create(Dog dog)
+        {
+            _context.Dog.Add(dog);
+            _context.SaveChanges();
+        }
+
+        public void Create(Cow cow)
+        {
+            _context.Cow.Add(cow);
             _context.SaveChanges();
         }
 

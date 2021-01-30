@@ -35,6 +35,8 @@ namespace TodoApi
             var todoListConnectionString = Configuration.GetConnectionString("TodoList");
             var animalFarmConnectionString = Configuration.GetConnectionString("AnimalFarm");
 
+            Console.WriteLine(Environment.GetEnvironmentVariable("ORM"));
+            
             switch (Environment.GetEnvironmentVariable("ORM"))
             {
                 case "Dapper":

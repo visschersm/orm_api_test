@@ -1,0 +1,49 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "command": "dotnet run --project ${workspaceFolder}/src/TestApi/TestApi.csproj",
+    "type": "shell",
+    "tasks": [
+        {
+            "label": "dapper",
+            "options": {
+                "env": {
+                    "ORM": "Dapper"
+                }
+            }
+        },
+        {
+            "label": "LLBLGen",
+            "options": {
+                "env": {
+                    "ORM": "LLBLGen"
+                }
+            }
+        },
+        {
+            "label": "EFCore",
+            "options": {
+                "env": {
+                    "ORM": "EFCore"
+                }
+            }
+        },
+        {
+            "label": "Linq2Db",
+            "options": {
+                "env": {
+                    "ORM": "Linq2Db"
+                }
+            }
+        },
+        {
+            "label": "NHibernate",
+            "options": {
+                "env": {
+                    "ORM": "NHibernate"
+                }
+            }
+        },
+    ]
+}

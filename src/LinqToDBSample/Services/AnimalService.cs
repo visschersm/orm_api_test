@@ -43,6 +43,28 @@ namespace MTech.LinqToDBSample
             }
         }
 
+        public void Create(Dog dog)
+        {
+            var dogEntity = new DogEntity
+            {
+                Type = dog.Type,
+                Name = dog.Name
+            };
+
+            _connection.Insert(dogEntity);
+        }
+
+        public void Create(Cow cow)
+        {
+            var cowEntity = new CowEntity
+            {
+                Type = cow.Type,
+                Name = cow.Name
+            };
+
+            _connection.Insert(cowEntity);
+        }
+
         public void Delete(int id)
         {
             _connection.Animal

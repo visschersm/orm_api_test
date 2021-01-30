@@ -7,9 +7,24 @@ namespace MTech.NHibernateSample
 {
     public class AnimalService : IAnimalService
     {
+        private readonly AnimalContext _context;
+
+        public AnimalService(AnimalContext context)
+            => _context = context;
+
         public void Create(Animal animal)
         {
-            throw new NotImplementedException();
+            _context.Save(animal);
+        }
+
+        public void Create(Dog dog)
+        {
+            _context.Save(dog);
+        }
+
+        public void Create(Cow cow)
+        {
+            _context.Save(cow);
         }
 
         public void Delete(int id)
