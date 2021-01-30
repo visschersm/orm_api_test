@@ -2,7 +2,7 @@
 using NHibernate;
 using System.Linq;
 
-namespace MTech.NHibernateSample
+namespace MTech.NHibernateSample.Contexts
 {
     public class TodoContext
     {

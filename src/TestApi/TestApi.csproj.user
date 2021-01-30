@@ -4,6 +4,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>NHibernate</ActiveDebugProfile>
+    <ActiveDebugProfile>Linq2Db</ActiveDebugProfile>
   </PropertyGroup>
 </Project>

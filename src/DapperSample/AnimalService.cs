@@ -17,7 +17,7 @@ namespace MTech.DapperSample
         public void Create(Animal animal)
         {
             var sql = $"DECLARE @p2 int; " +
-                    $"INSERT INTO [Animal] ([NAME], [Type]) VALUES('{animal.Name}', {animal.Type});";
+                    $"INSERT INTO [Animal] ([NAME], [Type]) VALUES('{animal.Name}', {(int)animal.Type});";
 
             if (animal.GetType().IsSubclassOf(typeof(Animal)))
             {
@@ -31,21 +31,21 @@ namespace MTech.DapperSample
         public void Create(Dog dog)
         {
             var sql = $"DECLARE @p2 int; " +
-                $"INSERT INTO [Animal] (NAME], [TYPE]) VALUES('{dog.Name}', {dog.Type}); " +
-                $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " + 
+                $"INSERT INTO [Animal] ([NAME], [TYPE]) VALUES('{dog.Name}', {(int)dog.Type}); " +
+                $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " +
                 $"INSERT INTO [Dog] ([Id]) VALUES(@p2);";
 
-                _connection.Execute(sql);
+            _connection.Execute(sql);
         }
 
         public void Create(Cow cow)
         {
             var sql = $"DECLARE @p2 int; " +
-                $"INSERT INTO [Animal] (NAME], [TYPE]) VALUES('{cow.Name}', {cow.Type}); " +
-                $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " + 
+                $"INSERT INTO [Animal] ([NAME], [TYPE]) VALUES('{cow.Name}', {(int)cow.Type}); " +
+                $"SELECT @p2 = [Id] FROM [Animal] WHERE [Id] = scope_identity(); " +
                 $"INSERT INTO [Cow] ([Id]) VALUES(@p2);";
 
-                _connection.Execute(sql);
+            _connection.Execute(sql);
         }
 
         public void Delete(int id)
@@ -69,7 +69,7 @@ namespace MTech.DapperSample
 
         public IList<Animal> GetByType(AnimalType type)
         {
-            var sql = $"SELECT * FROM Animal WHERE Type = {type}";
+            var sql = $"SELECT * FROM [Animal] WHERE Type = {(int)type}";
             return _connection.Query<Animal>(sql)
                 .ToList();
         }
@@ -78,7 +78,7 @@ namespace MTech.DapperSample
         {
             var sql = $"UPDATE Animal " +
                 $"SET Name = '{animal.Name}', " +
-                $"Type = {animal.Type} " +
+                $"Type = {(int)animal.Type} " +
                 $"WHERE id = {id}";
 
             _connection.Execute(sql);

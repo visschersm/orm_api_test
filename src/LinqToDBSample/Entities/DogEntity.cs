@@ -1,6 +1,7 @@
 ﻿namespace MTech.LinqToDBSample
 {
-    public class DogEntity : AnimalEntity
+    public class DogEntity
     {
+        public AnimalEntity Animal { get; set; }
     }
 }

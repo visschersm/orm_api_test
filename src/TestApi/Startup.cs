@@ -35,8 +35,6 @@ namespace TodoApi
             var todoListConnectionString = Configuration.GetConnectionString("TodoList");
             var animalFarmConnectionString = Configuration.GetConnectionString("AnimalFarm");
 
-            Console.WriteLine(Environment.GetEnvironmentVariable("ORM"));
-            
             switch (Environment.GetEnvironmentVariable("ORM"))
             {
                 case "Dapper":
@@ -70,6 +68,7 @@ namespace TodoApi
                     {
                         options.UseSqlServer(animalFarmConnectionString);
                     });
+                    services.AddScoped<IAnimalService, MTech.LinqToDBSample.AnimalService>();
                     break;
                 case "NHibernate":
                     services.AddNHibernate(todoListConnectionString);
@@ -78,13 +77,15 @@ namespace TodoApi
                     services.AddScoped<IAnimalService, MTech.NHibernateSample.AnimalService>();
                     break;
                 case "LLBLGen":
-                    RuntimeConfiguration.AddConnectionString("ConnectionString.SQL Server (SqlClient)", connectionString);
+                    RuntimeConfiguration.AddConnectionString("TodoContext ConnectionString.SQL Server (SqlClient)", todoListConnectionString);
+                    RuntimeConfiguration.AddConnectionString("AnimalContext ConnectionString.SQL Server (SqlClient)", animalFarmConnectionString);
                     RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
                                         c => c.SetTraceLevel(TraceLevel.Verbose)
                                                 .AddDbProviderFactory(typeof(System.Data.SqlClient.SqlClientFactory))
                                                 .SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012));
 
                     services.AddScoped<ITodoService, MTech.LLBLGenSample.TodoService>();
+                    services.AddScoped<IAnimalService, MTech.LLBLGenSample.AnimalService>();
                     break;
             }
 

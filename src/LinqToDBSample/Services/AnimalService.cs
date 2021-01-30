@@ -22,9 +22,9 @@ namespace MTech.LinqToDBSample
                 Name = animal.Name
             };
 
-            _connection.Insert(animalEntity);
+            _connection.Insert(animalEntity, "Animal");
 
-            if (animal.GetType().IsSubclassOf(typeof(Animal)))
+            /*if (animal.GetType().IsSubclassOf(typeof(Animal)))
             {
                 if (animal is Dog)
                 {
@@ -40,29 +40,43 @@ namespace MTech.LinqToDBSample
                         Id = animalEntity.Id
                     });
                 }
-            }
+            }*/
         }
 
         public void Create(Dog dog)
         {
-            var dogEntity = new DogEntity
+            var animalEntity = new AnimalEntity
             {
                 Type = dog.Type,
                 Name = dog.Name
             };
 
-            _connection.Insert(dogEntity);
+            _connection.Insert(animalEntity, "Animal");
+
+            var dogEntity = new DogEntity
+            {
+                Animal = animalEntity
+            };
+
+            _connection.Insert(dogEntity, "Dog");
         }
 
         public void Create(Cow cow)
         {
-            var cowEntity = new CowEntity
+            var animalEntity = new AnimalEntity
             {
                 Type = cow.Type,
                 Name = cow.Name
             };
 
-            _connection.Insert(cowEntity);
+            _connection.Insert(animalEntity, "Animal");
+
+            var cowEntity = new CowEntity
+            {
+                Id = animalEntity.Id
+            };
+
+            _connection.Insert(cowEntity, "Cow");
         }
 
         public void Delete(int id)

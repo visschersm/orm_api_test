@@ -12,8 +12,8 @@ namespace MTech.LinqToDBSample
 
         }
 
-        public ITable<AnimalEntity> Animal => GetTable<AnimalEntity>();
-        public ITable<DogEntity> Dog => GetTable<DogEntity>();
-        public ITable<CowEntity> Cow => GetTable<CowEntity>();
+        public ITable<AnimalEntity> Animal => GetTable<AnimalEntity>().TableName("Animal");
+        public ITable<DogEntity> Dog => GetTable<DogEntity>().TableName("Dog");
+        public ITable<CowEntity> Cow => GetTable<CowEntity>().TableName("Cow");
     }
 }

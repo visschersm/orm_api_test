@@ -1,4 +1,5 @@
 ﻿using MTech.Domain;
+using MTech.NHibernateSample.Contexts;
 using System.Collections.Generic;
 using System.Linq;
 
