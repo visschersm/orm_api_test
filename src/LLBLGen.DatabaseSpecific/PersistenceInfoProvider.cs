@@ -36,7 +36,33 @@ namespace MTech.Entities.DatabaseSpecific
 		private void Init()
 		{
 			this.InitClass();
+			InitAnimalEntityMappings();
+			InitCowEntityMappings();
+			InitDogEntityMappings();
 			InitTodoItemEntityMappings();
+		}
+
+		/// <summary>Inits AnimalEntity's mappings</summary>
+		private void InitAnimalEntityMappings()
+		{
+			this.AddElementMapping("AnimalEntity", @"AnimalFarm", @"dbo", "Animal", 3, 0);
+			this.AddElementFieldMapping("AnimalEntity", "Id", "Id", false, "Int", 0, 10, 0, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0);
+			this.AddElementFieldMapping("AnimalEntity", "Name", "Name", true, "NVarChar", 2147483647, 0, 0, false, "", null, typeof(System.String), 1);
+			this.AddElementFieldMapping("AnimalEntity", "Type", "Type", false, "Int", 0, 10, 0, false, "", null, typeof(System.Int32), 2);
+		}
+
+		/// <summary>Inits CowEntity's mappings</summary>
+		private void InitCowEntityMappings()
+		{
+			this.AddElementMapping("CowEntity", @"AnimalFarm", @"dbo", "Cow", 1, 0);
+			this.AddElementFieldMapping("CowEntity", "Id", "Id", false, "Int", 0, 10, 0, false, "", null, typeof(System.Int32), 0);
+		}
+
+		/// <summary>Inits DogEntity's mappings</summary>
+		private void InitDogEntityMappings()
+		{
+			this.AddElementMapping("DogEntity", @"AnimalFarm", @"dbo", "Dog", 1, 0);
+			this.AddElementFieldMapping("DogEntity", "Id", "Id", false, "Int", 0, 10, 0, false, "", null, typeof(System.Int32), 0);
 		}
 
 		/// <summary>Inits TodoItemEntity's mappings</summary>

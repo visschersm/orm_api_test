@@ -17,7 +17,6 @@ namespace MTech.Entities.FactoryClasses
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
 
-
 	/// <summary>general base class for the generated factories</summary>
 	[Serializable]
 	public partial class EntityFactoryBase2<TEntity> : EntityFactoryCore2
@@ -65,6 +64,36 @@ namespace MTech.Entities.FactoryClasses
 		
 		/// <inheritdoc/>
 		protected override Type ForEntityType { get { return typeof(TEntity); } }
+	}
+
+	/// <summary>Factory to create new, empty AnimalEntity objects.</summary>
+	[Serializable]
+	public partial class AnimalEntityFactory : EntityFactoryBase2<AnimalEntity> 
+	{
+		/// <summary>CTor</summary>
+		public AnimalEntityFactory() : base("AnimalEntity", MTech.Entities.EntityType.AnimalEntity, true) { }
+		/// <inheritdoc/>
+		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new AnimalEntity(fields); }
+	}
+
+	/// <summary>Factory to create new, empty CowEntity objects.</summary>
+	[Serializable]
+	public partial class CowEntityFactory : EntityFactoryBase2<CowEntity> 
+	{
+		/// <summary>CTor</summary>
+		public CowEntityFactory() : base("CowEntity", MTech.Entities.EntityType.CowEntity, true) { }
+		/// <inheritdoc/>
+		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new CowEntity(fields); }
+	}
+
+	/// <summary>Factory to create new, empty DogEntity objects.</summary>
+	[Serializable]
+	public partial class DogEntityFactory : EntityFactoryBase2<DogEntity> 
+	{
+		/// <summary>CTor</summary>
+		public DogEntityFactory() : base("DogEntity", MTech.Entities.EntityType.DogEntity, true) { }
+		/// <inheritdoc/>
+		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new DogEntity(fields); }
 	}
 
 	/// <summary>Factory to create new, empty TodoItemEntity objects.</summary>
@@ -124,6 +153,12 @@ namespace MTech.Entities.FactoryClasses
 		{
 			switch(typeOfEntity)
 			{
+				case MTech.Entities.EntityType.AnimalEntity:
+					return new AnimalEntityFactory();
+				case MTech.Entities.EntityType.CowEntity:
+					return new CowEntityFactory();
+				case MTech.Entities.EntityType.DogEntity:
+					return new DogEntityFactory();
 				case MTech.Entities.EntityType.TodoItemEntity:
 					return new TodoItemEntityFactory();
 				default:

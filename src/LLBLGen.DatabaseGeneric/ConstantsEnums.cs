@@ -14,6 +14,12 @@ namespace MTech.Entities
 	/// <summary>Enum definition for all the entity types defined in this namespace. Used by the entityfields factory.</summary>
 	public enum EntityType
 	{
+		///<summary>Animal</summary>
+		AnimalEntity,
+		///<summary>Cow</summary>
+		CowEntity,
+		///<summary>Dog</summary>
+		DogEntity,
 		///<summary>TodoItem</summary>
 		TodoItemEntity
 	}
@@ -22,7 +28,6 @@ namespace MTech.Entities
 
 	// __LLBLGENPRO_USER_CODE_REGION_START CustomUserConstants
 	// __LLBLGENPRO_USER_CODE_REGION_END
-
 
 }
 

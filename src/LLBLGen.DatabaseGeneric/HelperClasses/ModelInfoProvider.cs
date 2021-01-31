@@ -41,8 +41,37 @@ namespace MTech.Entities.HelperClasses
 		private void Init()
 		{
 			this.InitClass();
+			InitAnimalEntityInfo();
+			InitCowEntityInfo();
+			InitDogEntityInfo();
 			InitTodoItemEntityInfo();
 			this.BuildInternalStructures();
+		}
+
+		/// <summary>Inits AnimalEntity's info objects</summary>
+		private void InitAnimalEntityInfo()
+		{
+			this.AddEntityInfo("AnimalEntity", string.Empty, new AnimalRelations(), new AnimalEntityFactory(), 0);			
+			this.AddFieldIndexEnumForElementName(typeof(AnimalFieldIndex), "AnimalEntity");
+			this.AddElementFieldInfo("AnimalEntity", "Id", typeof(System.Int32), true, false, true, false,  (int)AnimalFieldIndex.Id, 0, 0, 10);
+			this.AddElementFieldInfo("AnimalEntity", "Name", typeof(System.String), false, false, false, true,  (int)AnimalFieldIndex.Name, 2147483647, 0, 0);
+			this.AddElementFieldInfo("AnimalEntity", "Type", typeof(System.Int32), false, false, false, false,  (int)AnimalFieldIndex.Type, 0, 0, 10);
+		}
+
+		/// <summary>Inits CowEntity's info objects</summary>
+		private void InitCowEntityInfo()
+		{
+			this.AddEntityInfo("CowEntity",  "AnimalEntity" , new CowRelations(), new CowEntityFactory(), 1);			
+			this.AddFieldIndexEnumForElementName(typeof(CowFieldIndex), "CowEntity");
+			this.AddElementFieldInfo("CowEntity", "Id", typeof(System.Int32), true, false, true, false,  (int)CowFieldIndex.Id, 0, 0, 10);
+		}
+
+		/// <summary>Inits DogEntity's info objects</summary>
+		private void InitDogEntityInfo()
+		{
+			this.AddEntityInfo("DogEntity",  "AnimalEntity" , new DogRelations(), new DogEntityFactory(), 1);			
+			this.AddFieldIndexEnumForElementName(typeof(DogFieldIndex), "DogEntity");
+			this.AddElementFieldInfo("DogEntity", "Id", typeof(System.Int32), true, false, true, false,  (int)DogFieldIndex.Id, 0, 0, 10);
 		}
 
 		/// <summary>Inits TodoItemEntity's info objects</summary>

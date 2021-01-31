@@ -18,6 +18,15 @@ namespace MTech.Entities.FactoryClasses
 	/// <summary>Factory class to produce DynamicQuery instances and EntityQuery instances</summary>
 	public partial class QueryFactory : QueryFactoryBase2
 	{
+		/// <summary>Creates and returns a new EntityQuery for the Animal entity</summary>
+		public EntityQuery<AnimalEntity> Animal { get { return Create<AnimalEntity>(); } }
+
+		/// <summary>Creates and returns a new EntityQuery for the Cow entity</summary>
+		public EntityQuery<CowEntity> Cow { get { return Create<CowEntity>(); } }
+
+		/// <summary>Creates and returns a new EntityQuery for the Dog entity</summary>
+		public EntityQuery<DogEntity> Dog { get { return Create<DogEntity>(); } }
+
 		/// <summary>Creates and returns a new EntityQuery for the TodoItem entity</summary>
 		public EntityQuery<TodoItemEntity> TodoItem { get { return Create<TodoItemEntity>(); } }
 

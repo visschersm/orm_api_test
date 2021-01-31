@@ -1,9 +1,11 @@
-﻿using MTech;
-using MTech.Domain;
+﻿using MTech.Domain;
 using MTech.Domain.Enums;
-using System.Collections.Generic;
 using MTech.Entities.DatabaseSpecific;
 using MTech.Entities.EntityClasses;
+using MTech.Entities.Linq;
+using SD.LLBLGen.Pro.ORMSupportClasses;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MTech.LLBLGenSample
 {
@@ -11,62 +13,121 @@ namespace MTech.LLBLGenSample
     {
         public void Create(Animal animal)
         {
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
             if (animal.GetType().IsSubclassOf(typeof(Animal)))
             {
-
+                switch (animal)
+                {
+                    case Dog:
+                        adapter.SaveEntity(new DogEntity
+                        {
+                            Name = animal.Name,
+                            Type = (int)animal.Type
+                        });
+                        break;
+                    case Cow:
+                        adapter.SaveEntity(new CowEntity
+                        {
+                            Name = animal.Name,
+                            Type = (int)animal.Type
+                        });
+                        break;
+                }
+            }
+            else
+            {
+                adapter.SaveEntity(new AnimalEntity
+                {
+                    Name = animal.Name,
+                    Type = (int)animal.Type
+                });
             }
 
-            using var adapter = new DataAccessAdapter();
-            // adapter.SaveEntity(new AnimalEntity
-            // {
-            //     Name = animal.Name,
-            //     Type = animal.Type
-            // });
         }
 
         public void Create(Dog dog)
         {
-            // using var adapter = new DataAccessAdapter();
-            // adapter.SaveEntity(new DogEntity
-            // {
-            //     Name = dog.Name,
-            //     Type = dog.Type
-            // });
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            adapter.SaveEntity(new DogEntity
+            {
+                Name = dog.Name,
+                Type = (int)dog.Type
+            });
         }
 
         public void Create(Cow cow)
         {
-            // using var adapter = new DataAccessAdapter();
-            // adapter.SaveEntity(new CowEntity
-            // {
-            //     Name = cow.Name,
-            //     Type = cow.Type
-            // });
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            adapter.SaveEntity(new CowEntity
+            {
+                Name = cow.Name,
+                Type = (int)cow.Type
+            });
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            adapter.DeleteEntity(new AnimalEntity { Id = id });
         }
 
         public IList<Animal> GetAll()
         {
-            throw new System.NotImplementedException();
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            var metaData = new LinqMetaData(adapter);
+            return metaData.Animal
+                .Select(animal => new Animal
+                {
+                    Id = animal.Id,
+                    Type = (AnimalType)animal.Type,
+                    Name = animal.Name
+                }).ToList();
         }
 
         public Animal GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            var metaData = new LinqMetaData(adapter);
+            return metaData.Animal
+                .Where(animal => animal.Id == id)
+                .Select(animal => new Animal
+                {
+                    Id = animal.Id,
+                    Type = (AnimalType)animal.Type,
+                    Name = animal.Name
+                }).SingleOrDefault();
         }
 
         public IList<Animal> GetByType(AnimalType type)
         {
-            throw new System.NotImplementedException();
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            var metaData = new LinqMetaData(adapter);
+            return metaData.Animal
+                .Where(animal => animal.Type == (int)type)
+                .Select(Animal => new Animal
+                {
+                    Id = Animal.Id,
+                    Type = (AnimalType)Animal.Type,
+                    Name = Animal.Name
+                }).ToList();
         }
 
         public void Update(int id, Animal animal)
         {
-            throw new System.NotImplementedException();
+            var connectionString = RuntimeConfiguration.GetConnectionString("AnimalContext");
+            using var adapter = new DataAccessAdapter(connectionString);
+            var entity = new AnimalEntity { Id = id };
+            adapter.FetchEntity(entity);
+            entity.Type = (int)animal.Type;
+            entity.Name = animal.Name;
+            adapter.SaveEntity(entity);
         }
     }
 }

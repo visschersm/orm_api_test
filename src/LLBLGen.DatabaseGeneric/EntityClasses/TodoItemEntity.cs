@@ -20,17 +20,15 @@ namespace MTech.Entities.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-
 	/// <summary>Entity class which represents the entity 'TodoItem'.<br/><br/></summary>
 	[Serializable]
 	public partial class TodoItemEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-	
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
+
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-
 		private static TodoItemEntityStaticMetaData _staticMetaData = new TodoItemEntityStaticMetaData();
 		private static TodoItemRelations _relationsFactory = new TodoItemRelations();
 
@@ -106,7 +104,6 @@ namespace MTech.Entities.EntityClasses
 			PerformDependencyInjection();
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-
 			OnInitClassMembersComplete();
 		}
 
@@ -121,7 +118,6 @@ namespace MTech.Entities.EntityClasses
 			InitClassMembers();
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-
 
 			OnInitialized();
 		}
@@ -143,9 +139,9 @@ namespace MTech.Entities.EntityClasses
 			get { return (System.String)GetValue((int)TodoItemFieldIndex.Title, true); }
 			set	{ SetValue((int)TodoItemFieldIndex.Title, value); }
 		}
+
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-
 
 	}
 }

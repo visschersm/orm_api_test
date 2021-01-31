@@ -44,6 +44,12 @@ namespace MTech.Entities.Linq
 		{
 			switch((MTech.Entities.EntityType)typeOfEntity)
 			{
+				case MTech.Entities.EntityType.AnimalEntity:
+					return this.Animal;
+				case MTech.Entities.EntityType.CowEntity:
+					return this.Cow;
+				case MTech.Entities.EntityType.DogEntity:
+					return this.Dog;
 				case MTech.Entities.EntityType.TodoItemEntity:
 					return this.TodoItem;
 				default:
@@ -60,6 +66,15 @@ namespace MTech.Entities.Linq
 			return new DataSource2<TEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse);
 		}
 
+		/// <summary>returns the datasource to use in a Linq query when targeting AnimalEntity instances in the database.</summary>
+		public DataSource2<AnimalEntity> Animal {	get { return new DataSource2<AnimalEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse); } }
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting CowEntity instances in the database.</summary>
+		public DataSource2<CowEntity> Cow {	get { return new DataSource2<CowEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse); } }
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting DogEntity instances in the database.</summary>
+		public DataSource2<DogEntity> Dog {	get { return new DataSource2<DogEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse); } }
+		
 		/// <summary>returns the datasource to use in a Linq query when targeting TodoItemEntity instances in the database.</summary>
 		public DataSource2<TodoItemEntity> TodoItem {	get { return new DataSource2<TodoItemEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse); } }
 		

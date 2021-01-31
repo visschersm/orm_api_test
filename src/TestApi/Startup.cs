@@ -77,8 +77,8 @@ namespace TodoApi
                     services.AddScoped<IAnimalService, MTech.NHibernateSample.AnimalService>();
                     break;
                 case "LLBLGen":
-                    RuntimeConfiguration.AddConnectionString("TodoContext ConnectionString.SQL Server (SqlClient)", todoListConnectionString);
-                    RuntimeConfiguration.AddConnectionString("AnimalContext ConnectionString.SQL Server (SqlClient)", animalFarmConnectionString);
+                    RuntimeConfiguration.AddConnectionString("TodoContext", todoListConnectionString);
+                    RuntimeConfiguration.AddConnectionString("AnimalContext", animalFarmConnectionString);
                     RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
                                         c => c.SetTraceLevel(TraceLevel.Verbose)
                                                 .AddDbProviderFactory(typeof(System.Data.SqlClient.SqlClientFactory))
