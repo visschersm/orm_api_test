@@ -1,6 +1,7 @@
 ﻿using LinqToDB;
 using MTech.Domain;
 using MTech.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,68 +16,52 @@ namespace MTech.LinqToDBSample
 
         public void Create(Animal animal)
         {
-            // TODO: Add transaction
-            var animalEntity = new AnimalEntity
+            using var transaction = _connection.BeginTransaction();
+            try
             {
-                Type = animal.Type,
-                Name = animal.Name
-            };
+                var animalEntity = new AnimalEntity
+                {
+                    Type = animal.Type,
+                    Name = animal.Name
+                };
 
-            _connection.Insert(animalEntity, "Animal");
+                var id = _connection.InsertWithInt32Identity(animalEntity, "Animal");
 
-            /*if (animal.GetType().IsSubclassOf(typeof(Animal)))
+                if (animal.GetType().IsSubclassOf(typeof(Animal)))
+                {
+                    switch (animal)
+                    {
+                        case Dog:
+                            _connection.Insert(new DogEntity
+                            {
+                                Id = id
+                            }, "Dog");
+                            break;
+                        case Cow:
+                            _connection.Insert(new CowEntity
+                            {
+                                Id = id
+                            }, "Cow");
+                            break;
+                        default:
+                            throw new NotImplementedException($"Type: {animal.GetType()} is not supported");
+                    }
+                }
+            }
+            catch
             {
-                if (animal is Dog)
-                {
-                    _connection.Insert(new DogEntity
-                    {
-                        Id = animalEntity.Id
-                    });
-                }
-                else if (animal is Cow)
-                {
-                    _connection.Insert(new CowEntity
-                    {
-                        Id = animalEntity.Id
-                    });
-                }
-            }*/
+                transaction.Rollback();
+            }
         }
 
         public void Create(Dog dog)
         {
-            var animalEntity = new AnimalEntity
-            {
-                Type = dog.Type,
-                Name = dog.Name
-            };
-
-            _connection.Insert(animalEntity, "Animal");
-
-            var dogEntity = new DogEntity
-            {
-                Animal = animalEntity
-            };
-
-            _connection.Insert(dogEntity, "Dog");
+            Create((Animal)dog);
         }
 
         public void Create(Cow cow)
         {
-            var animalEntity = new AnimalEntity
-            {
-                Type = cow.Type,
-                Name = cow.Name
-            };
-
-            _connection.Insert(animalEntity, "Animal");
-
-            var cowEntity = new CowEntity
-            {
-                Id = animalEntity.Id
-            };
-
-            _connection.Insert(cowEntity, "Cow");
+            Create((Animal)cow);
         }
 
         public void Delete(int id)
