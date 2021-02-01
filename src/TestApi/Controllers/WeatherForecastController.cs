@@ -20,5 +20,11 @@ namespace MTech.TodoApi.Controllers
         {
             return _weatherService.GetForecast();
         }
+
+        [HttpPost]
+        public void Create(WeatherForecast model)
+        {
+            _weatherService.Create(model);
+        }
     }
 }

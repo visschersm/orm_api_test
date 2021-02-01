@@ -2,10 +2,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>MTech.Entities</AssemblyName>
-    <RootNamespace>MTech.Entities</RootNamespace>
+    <AssemblyName>LLBLGen.MTech.Entities</AssemblyName>
+    <RootNamespace>LLBLGen.MTech.Entities</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SD.LLBLGen.Pro.ORMSupportClasses" Version="5.7.2" />
+    <PackageReference Include="SD.LLBLGen.Pro.ORMSupportClasses" Version="5.7.0" />
   </ItemGroup>
 </Project>

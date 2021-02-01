@@ -8,7 +8,7 @@
 using System;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.HelperClasses
+namespace MTech.LLBLGen.Entities.HelperClasses
 {
 	/// <summary>Class for the returning of a default value when a type is given. These Default values are used for EntityFields which have a NULL value in the database.</summary>
 	[Serializable]

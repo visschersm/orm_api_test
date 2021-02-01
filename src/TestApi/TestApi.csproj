@@ -22,7 +22,6 @@
     <ProjectReference Include="..\LLBLGenSample\LLBLGenSample.csproj" />
     <ProjectReference Include="..\NHibernateSample\NHibernateSample.csproj" />
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
-    <ProjectReference Include="..\WeatherForecastSample\WeatherForecastSample.csproj" />
     <ProjectReference Include="..\DapperSample\DapperSample.csproj" />
     <ProjectReference Include="..\EFSample\EFSample.csproj" />
     <ProjectReference Include="..\LinqToDBSample\LinqToDBSample.csproj" />

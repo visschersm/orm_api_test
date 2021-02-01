@@ -7,13 +7,13 @@
 ////////////////////////////////////////////////////////////// 
 using System;
 using System.Linq;
-using MTech.Entities.EntityClasses;
-using MTech.Entities.HelperClasses;
+using MTech.LLBLGen.Entities.EntityClasses;
+using MTech.LLBLGen.Entities.HelperClasses;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using SD.LLBLGen.Pro.QuerySpec.AdapterSpecific;
 using SD.LLBLGen.Pro.QuerySpec;
 
-namespace MTech.Entities.FactoryClasses
+namespace MTech.LLBLGen.Entities.FactoryClasses
 {
 	/// <summary>Factory class to produce DynamicQuery instances and EntityQuery instances</summary>
 	public partial class QueryFactory : QueryFactoryBase2
@@ -29,6 +29,9 @@ namespace MTech.Entities.FactoryClasses
 
 		/// <summary>Creates and returns a new EntityQuery for the TodoItem entity</summary>
 		public EntityQuery<TodoItemEntity> TodoItem { get { return Create<TodoItemEntity>(); } }
+
+		/// <summary>Creates and returns a new EntityQuery for the WeatherForecast entity</summary>
+		public EntityQuery<WeatherForecastEntity> WeatherForecast { get { return Create<WeatherForecastEntity>(); } }
 
 		/// <inheritdoc/>
 		protected override IElementCreatorCore CreateElementCreator() { return new ElementCreator(); }

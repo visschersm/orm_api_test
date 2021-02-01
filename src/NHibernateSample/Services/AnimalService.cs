@@ -51,7 +51,7 @@ namespace MTech.NHibernateSample
         public IList<Animal> GetByType(AnimalType type)
         {
             return _session.Query<Animal>()
-                .Where(animal => animal.Type == type)
+                .Where(animal => (int)animal.Type == (int)type)
                 .ToList();
         }
 

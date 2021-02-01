@@ -6,12 +6,12 @@
 // Templates vendor: Solutions Design.
 //////////////////////////////////////////////////////////////
 using System;
-using MTech.Entities.HelperClasses;
-using MTech.Entities.FactoryClasses;
+using MTech.LLBLGen.Entities.HelperClasses;
+using MTech.LLBLGen.Entities.FactoryClasses;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using System.Runtime.Serialization;
 
-namespace MTech.Entities.EntityClasses
+namespace MTech.LLBLGen.Entities.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
@@ -87,7 +87,7 @@ namespace MTech.Entities.EntityClasses
 		/// <inheritdoc/>
 		protected override Type LLBLGenProEntityTypeEnumType
 		{
-			get { return typeof(MTech.Entities.EntityType); }
+			get { return typeof(MTech.LLBLGen.Entities.EntityType); }
 		}
 
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode

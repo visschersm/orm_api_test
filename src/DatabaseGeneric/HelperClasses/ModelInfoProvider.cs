@@ -6,11 +6,11 @@
 // Templates vendor: Solutions Design.
 //////////////////////////////////////////////////////////////
 using System;
-using MTech.Entities.FactoryClasses;
-using MTech.Entities.RelationClasses;
+using MTech.LLBLGen.Entities.FactoryClasses;
+using MTech.LLBLGen.Entities.RelationClasses;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.HelperClasses
+namespace MTech.LLBLGen.Entities.HelperClasses
 {
 	/// <summary>Singleton implementation of the ModelInfoProvider. This class is the singleton wrapper through which the actual instance is retrieved.</summary>
 	public static class ModelInfoProviderSingleton
@@ -45,6 +45,7 @@ namespace MTech.Entities.HelperClasses
 			InitCowEntityInfo();
 			InitDogEntityInfo();
 			InitTodoItemEntityInfo();
+			InitWeatherForecastEntityInfo();
 			this.BuildInternalStructures();
 		}
 
@@ -80,6 +81,16 @@ namespace MTech.Entities.HelperClasses
 			this.AddFieldIndexEnumForElementName(typeof(TodoItemFieldIndex), "TodoItemEntity");
 			this.AddElementFieldInfo("TodoItemEntity", "Id", typeof(System.Int32), true, false, true, false,  (int)TodoItemFieldIndex.Id, 0, 0, 10);
 			this.AddElementFieldInfo("TodoItemEntity", "Title", typeof(System.String), false, false, false, false,  (int)TodoItemFieldIndex.Title, 128, 0, 0);
+		}
+
+		/// <summary>Inits WeatherForecastEntity's info objects</summary>
+		private void InitWeatherForecastEntityInfo()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(WeatherForecastFieldIndex), "WeatherForecastEntity");
+			this.AddElementFieldInfo("WeatherForecastEntity", "Date", typeof(Nullable<System.DateTime>), false, false, false, true,  (int)WeatherForecastFieldIndex.Date, 0, 0, 0);
+			this.AddElementFieldInfo("WeatherForecastEntity", "Id", typeof(System.Int32), true, false, true, false,  (int)WeatherForecastFieldIndex.Id, 0, 0, 10);
+			this.AddElementFieldInfo("WeatherForecastEntity", "Summary", typeof(System.String), false, false, false, true,  (int)WeatherForecastFieldIndex.Summary, 2147483647, 0, 0);
+			this.AddElementFieldInfo("WeatherForecastEntity", "TemperatureC", typeof(Nullable<System.Int32>), false, false, false, true,  (int)WeatherForecastFieldIndex.TemperatureC, 0, 0, 10);
 		}
 	}
 }

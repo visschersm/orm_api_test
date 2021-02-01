@@ -10,10 +10,10 @@ using System.Linq;
 using System.Collections.Generic;
 using SD.LLBLGen.Pro.LinqSupportClasses;
 using SD.LLBLGen.Pro.ORMSupportClasses;
-using MTech.Entities.EntityClasses;
-using MTech.Entities.FactoryClasses;
+using MTech.LLBLGen.Entities.EntityClasses;
+using MTech.LLBLGen.Entities.FactoryClasses;
 
-namespace MTech.Entities.Linq
+namespace MTech.LLBLGen.Entities.Linq
 {
 	/// <summary>Meta-data class for the construction of Linq queries which are to be executed using LLBLGen Pro code.</summary>
 	public partial class LinqMetaData: ILinqMetaData
@@ -42,16 +42,18 @@ namespace MTech.Entities.Linq
 		/// <returns>the requested datasource</returns>
 		public IDataSource GetQueryableForEntity(int typeOfEntity)
 		{
-			switch((MTech.Entities.EntityType)typeOfEntity)
+			switch((MTech.LLBLGen.Entities.EntityType)typeOfEntity)
 			{
-				case MTech.Entities.EntityType.AnimalEntity:
+				case MTech.LLBLGen.Entities.EntityType.AnimalEntity:
 					return this.Animal;
-				case MTech.Entities.EntityType.CowEntity:
+				case MTech.LLBLGen.Entities.EntityType.CowEntity:
 					return this.Cow;
-				case MTech.Entities.EntityType.DogEntity:
+				case MTech.LLBLGen.Entities.EntityType.DogEntity:
 					return this.Dog;
-				case MTech.Entities.EntityType.TodoItemEntity:
+				case MTech.LLBLGen.Entities.EntityType.TodoItemEntity:
 					return this.TodoItem;
+				case MTech.LLBLGen.Entities.EntityType.WeatherForecastEntity:
+					return this.WeatherForecast;
 				default:
 					return null;
 			}
@@ -77,6 +79,9 @@ namespace MTech.Entities.Linq
 		
 		/// <summary>returns the datasource to use in a Linq query when targeting TodoItemEntity instances in the database.</summary>
 		public DataSource2<TodoItemEntity> TodoItem {	get { return new DataSource2<TodoItemEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse); } }
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting WeatherForecastEntity instances in the database.</summary>
+		public DataSource2<WeatherForecastEntity> WeatherForecast {	get { return new DataSource2<WeatherForecastEntity>(this.AdapterToUse, new ElementCreator(), this.CustomFunctionMappings, this.ContextToUse); } }
 		
 
 

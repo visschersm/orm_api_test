@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseGeneric\MTech.LLBLGen.Entities.csproj" />
+    <ProjectReference Include="..\DatabaseSpecific\MTech.LLBLGen.EntitiesDBSpecific.csproj" />
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
-    <ProjectReference Include="..\LLBLGen.DatabaseGeneric\LLBLGen.MTech.Entities.csproj" />
-    <ProjectReference Include="..\LLBLGen.DatabaseSpecific\LLBLGen.MTech.EntitiesDBSpecific.csproj" />
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
   </ItemGroup>
 

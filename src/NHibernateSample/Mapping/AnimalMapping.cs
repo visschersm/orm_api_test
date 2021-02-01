@@ -1,7 +1,9 @@
 ﻿using MTech.Domain;
+using MTech.Domain.Enums;
 using NHibernate;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
+using NHibernate.Type;
 
 namespace MTech.NHibernateSample.Mapping
 {
@@ -24,7 +26,7 @@ namespace MTech.NHibernateSample.Mapping
             Property(x => x.Type, x =>
             {
                 x.Column("Type");
-                x.Type(NHibernateUtil.Int32);
+                x.Type<EnumType<AnimalType>>();
             });
         }
     }

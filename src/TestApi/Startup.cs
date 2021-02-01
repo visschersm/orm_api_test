@@ -62,6 +62,12 @@ namespace TestApi
                     services.AddScoped<IAnimalService, MTech.EFSample.AnimalService>();
                     break;
                 case "Linq2Db":
+                    services.AddLinqToDbContext<MTech.LinqToDBSample.WeatherConnection>((provider, options) =>
+                    {
+                        options.UseSqlServer(connectionString);
+                    });
+                    services.AddScoped<IWeatherService, MTech.LinqToDBSample.WeatherService>();
+
                     services.AddLinqToDbContext<MTech.LinqToDBSample.TodoDataConnection>((provider, options) =>
                     {
                         options.UseSqlServer(todoListConnectionString);
@@ -75,6 +81,7 @@ namespace TestApi
                     services.AddScoped<IAnimalService, MTech.LinqToDBSample.AnimalService>();
                     break;
                 case "LLBLGen":
+                    RuntimeConfiguration.AddConnectionString("WeatherContext", connectionString);
                     RuntimeConfiguration.AddConnectionString("TodoContext", todoListConnectionString);
                     RuntimeConfiguration.AddConnectionString("AnimalContext", animalFarmConnectionString);
                     RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
@@ -82,6 +89,7 @@ namespace TestApi
                                                 .AddDbProviderFactory(typeof(System.Data.SqlClient.SqlClientFactory))
                                                 .SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012));
 
+                    services.AddScoped<IWeatherService, MTech.LLBLGenSample.WeatherService>();
                     services.AddScoped<ITodoService, MTech.LLBLGenSample.TodoService>();
                     services.AddScoped<IAnimalService, MTech.LLBLGenSample.AnimalService>();
                     break;

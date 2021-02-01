@@ -10,13 +10,13 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using MTech.Entities.HelperClasses;
-using MTech.Entities.FactoryClasses;
-using MTech.Entities.RelationClasses;
+using MTech.LLBLGen.Entities.HelperClasses;
+using MTech.LLBLGen.Entities.FactoryClasses;
+using MTech.LLBLGen.Entities.RelationClasses;
 
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.EntityClasses
+namespace MTech.LLBLGen.Entities.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
@@ -42,7 +42,7 @@ namespace MTech.Entities.EntityClasses
 		{
 			public DogEntityStaticMetaData()
 			{
-				SetEntityCoreInfo("DogEntity", InheritanceHierarchyType.TargetPerEntity, true, (int)MTech.Entities.EntityType.DogEntity, typeof(DogEntity), typeof(DogEntityFactory), false);
+				SetEntityCoreInfo("DogEntity", InheritanceHierarchyType.TargetPerEntity, true, (int)MTech.LLBLGen.Entities.EntityType.DogEntity, typeof(DogEntity), typeof(DogEntityFactory), false);
 			}
 		}
 
@@ -129,7 +129,7 @@ namespace MTech.Entities.EntityClasses
 	}
 }
 
-namespace MTech.Entities
+namespace MTech.LLBLGen.Entities
 {
 	public enum DogFieldIndex
 	{
@@ -146,7 +146,7 @@ namespace MTech.Entities
 	}
 }
 
-namespace MTech.Entities.RelationClasses
+namespace MTech.LLBLGen.Entities.RelationClasses
 {
 	/// <summary>Implements the relations factory for the entity: Dog. </summary>
 	public partial class DogRelations: AnimalRelations

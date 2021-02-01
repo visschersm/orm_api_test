@@ -7,12 +7,12 @@
 //////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using MTech.Entities.EntityClasses;
-using MTech.Entities.HelperClasses;
-using MTech.Entities.RelationClasses;
+using MTech.LLBLGen.Entities.EntityClasses;
+using MTech.LLBLGen.Entities.HelperClasses;
+using MTech.LLBLGen.Entities.RelationClasses;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.FactoryClasses
+namespace MTech.LLBLGen.Entities.FactoryClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
@@ -22,14 +22,14 @@ namespace MTech.Entities.FactoryClasses
 	public partial class EntityFactoryBase2<TEntity> : EntityFactoryCore2
 		where TEntity : EntityBase2, IEntity2
 	{
-		private readonly MTech.Entities.EntityType _typeOfEntity;
+		private readonly MTech.LLBLGen.Entities.EntityType _typeOfEntity;
 		private readonly bool _isInHierarchy;
 
 		/// <summary>CTor</summary>
 		/// <param name="entityName">Name of the entity.</param>
 		/// <param name="typeOfEntity">The type of entity.</param>
 		/// <param name="isInHierarchy">If true, the entity of this factory is in an inheritance hierarchy, false otherwise</param>
-		public EntityFactoryBase2(string entityName, MTech.Entities.EntityType typeOfEntity, bool isInHierarchy) : base(entityName)
+		public EntityFactoryBase2(string entityName, MTech.LLBLGen.Entities.EntityType typeOfEntity, bool isInHierarchy) : base(entityName)
 		{
 			_typeOfEntity = typeOfEntity;
 			_isInHierarchy = isInHierarchy;
@@ -39,7 +39,7 @@ namespace MTech.Entities.FactoryClasses
 		public override IEntityFields2 CreateFields() { return ModelInfoProviderSingleton.GetInstance().GetEntityFields(this.ForEntityName); }
 		
 		/// <inheritdoc/>
-		public override IEntity2 CreateEntityFromEntityTypeValue(int entityTypeValue) {	return GeneralEntityFactory.Create((MTech.Entities.EntityType)entityTypeValue); }
+		public override IEntity2 CreateEntityFromEntityTypeValue(int entityTypeValue) {	return GeneralEntityFactory.Create((MTech.LLBLGen.Entities.EntityType)entityTypeValue); }
 
 		/// <inheritdoc/>
 		public override IRelationCollection CreateHierarchyRelations(string objectAlias) { return ModelInfoProviderSingleton.GetInstance().GetHierarchyRelations(this.ForEntityName, objectAlias); }
@@ -71,7 +71,7 @@ namespace MTech.Entities.FactoryClasses
 	public partial class AnimalEntityFactory : EntityFactoryBase2<AnimalEntity> 
 	{
 		/// <summary>CTor</summary>
-		public AnimalEntityFactory() : base("AnimalEntity", MTech.Entities.EntityType.AnimalEntity, true) { }
+		public AnimalEntityFactory() : base("AnimalEntity", MTech.LLBLGen.Entities.EntityType.AnimalEntity, true) { }
 		/// <inheritdoc/>
 		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new AnimalEntity(fields); }
 	}
@@ -81,7 +81,7 @@ namespace MTech.Entities.FactoryClasses
 	public partial class CowEntityFactory : EntityFactoryBase2<CowEntity> 
 	{
 		/// <summary>CTor</summary>
-		public CowEntityFactory() : base("CowEntity", MTech.Entities.EntityType.CowEntity, true) { }
+		public CowEntityFactory() : base("CowEntity", MTech.LLBLGen.Entities.EntityType.CowEntity, true) { }
 		/// <inheritdoc/>
 		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new CowEntity(fields); }
 	}
@@ -91,7 +91,7 @@ namespace MTech.Entities.FactoryClasses
 	public partial class DogEntityFactory : EntityFactoryBase2<DogEntity> 
 	{
 		/// <summary>CTor</summary>
-		public DogEntityFactory() : base("DogEntity", MTech.Entities.EntityType.DogEntity, true) { }
+		public DogEntityFactory() : base("DogEntity", MTech.LLBLGen.Entities.EntityType.DogEntity, true) { }
 		/// <inheritdoc/>
 		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new DogEntity(fields); }
 	}
@@ -101,9 +101,19 @@ namespace MTech.Entities.FactoryClasses
 	public partial class TodoItemEntityFactory : EntityFactoryBase2<TodoItemEntity> 
 	{
 		/// <summary>CTor</summary>
-		public TodoItemEntityFactory() : base("TodoItemEntity", MTech.Entities.EntityType.TodoItemEntity, false) { }
+		public TodoItemEntityFactory() : base("TodoItemEntity", MTech.LLBLGen.Entities.EntityType.TodoItemEntity, false) { }
 		/// <inheritdoc/>
 		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new TodoItemEntity(fields); }
+	}
+
+	/// <summary>Factory to create new, empty WeatherForecastEntity objects.</summary>
+	[Serializable]
+	public partial class WeatherForecastEntityFactory : EntityFactoryBase2<WeatherForecastEntity> 
+	{
+		/// <summary>CTor</summary>
+		public WeatherForecastEntityFactory() : base("WeatherForecastEntity", MTech.LLBLGen.Entities.EntityType.WeatherForecastEntity, false) { }
+		/// <inheritdoc/>
+		protected override IEntity2 CreateImpl(IEntityFields2 fields) { return new WeatherForecastEntity(fields); }
 	}
 
 	/// <summary>Factory to create new, empty Entity objects based on the entity type specified. Uses  entity specific factory objects</summary>
@@ -113,7 +123,7 @@ namespace MTech.Entities.FactoryClasses
 		/// <summary>Creates a new, empty Entity object of the type specified</summary>
 		/// <param name="entityTypeToCreate">The entity type to create.</param>
 		/// <returns>A new, empty Entity object.</returns>
-		public static IEntity2 Create(MTech.Entities.EntityType entityTypeToCreate)
+		public static IEntity2 Create(MTech.LLBLGen.Entities.EntityType entityTypeToCreate)
 		{
 			var factoryToUse = EntityFactoryFactory.GetFactory(entityTypeToCreate);
 			IEntity2 toReturn = null;
@@ -134,9 +144,9 @@ namespace MTech.Entities.FactoryClasses
 		/// <summary>Initializes the <see cref="EntityFactoryFactory"/> class.</summary>
 		static EntityFactoryFactory()
 		{
-			foreach(int entityTypeValue in Enum.GetValues(typeof(MTech.Entities.EntityType)))
+			foreach(int entityTypeValue in Enum.GetValues(typeof(MTech.LLBLGen.Entities.EntityType)))
 			{
-				var factory = GetFactory((MTech.Entities.EntityType)entityTypeValue);
+				var factory = GetFactory((MTech.LLBLGen.Entities.EntityType)entityTypeValue);
 				_factoryPerType.Add(factory.ForEntityType ?? factory.Create().GetType(), factory);
 			}
 		}
@@ -146,21 +156,23 @@ namespace MTech.Entities.FactoryClasses
 		/// <returns>factory to use or null if not found</returns>
 		public static IEntityFactory2 GetFactory(Type typeOfEntity) { return _factoryPerType.GetValue(typeOfEntity); }
 
-		/// <summary>Gets the factory of the entity with the MTech.Entities.EntityType specified</summary>
+		/// <summary>Gets the factory of the entity with the MTech.LLBLGen.Entities.EntityType specified</summary>
 		/// <param name="typeOfEntity">The type of entity.</param>
 		/// <returns>factory to use or null if not found</returns>
-		public static IEntityFactory2 GetFactory(MTech.Entities.EntityType typeOfEntity)
+		public static IEntityFactory2 GetFactory(MTech.LLBLGen.Entities.EntityType typeOfEntity)
 		{
 			switch(typeOfEntity)
 			{
-				case MTech.Entities.EntityType.AnimalEntity:
+				case MTech.LLBLGen.Entities.EntityType.AnimalEntity:
 					return new AnimalEntityFactory();
-				case MTech.Entities.EntityType.CowEntity:
+				case MTech.LLBLGen.Entities.EntityType.CowEntity:
 					return new CowEntityFactory();
-				case MTech.Entities.EntityType.DogEntity:
+				case MTech.LLBLGen.Entities.EntityType.DogEntity:
 					return new DogEntityFactory();
-				case MTech.Entities.EntityType.TodoItemEntity:
+				case MTech.LLBLGen.Entities.EntityType.TodoItemEntity:
 					return new TodoItemEntityFactory();
+				case MTech.LLBLGen.Entities.EntityType.WeatherForecastEntity:
+					return new WeatherForecastEntityFactory();
 				default:
 					return null;
 			}
@@ -170,7 +182,7 @@ namespace MTech.Entities.FactoryClasses
 	/// <summary>Element creator for creating project elements from somewhere else, like inside Linq providers.</summary>
 	public class ElementCreator : ElementCreatorBase, IElementCreator2
 	{
-		/// <summary>Gets the factory of the Entity type with the MTech.Entities.EntityType value passed in</summary>
+		/// <summary>Gets the factory of the Entity type with the MTech.LLBLGen.Entities.EntityType value passed in</summary>
 		/// <param name="entityTypeValue">The entity type value.</param>
 		/// <returns>the entity factory of the entity type or null if not found</returns>
 		public IEntityFactory2 GetFactory(int entityTypeValue) { return (IEntityFactory2)this.GetFactoryImpl(entityTypeValue); }
@@ -206,23 +218,23 @@ namespace MTech.Entities.FactoryClasses
 		/// <inheritdoc/>
 		public override IDynamicRelation CreateDynamicRelation(DerivedTableDefinition leftOperand, JoinHint joinType, string rightOperandEntityName, string aliasRightOperand, IPredicate onClause)
 		{
-			return new DynamicRelation(leftOperand, joinType, (MTech.Entities.EntityType)Enum.Parse(typeof(MTech.Entities.EntityType), rightOperandEntityName, false), aliasRightOperand, onClause);
+			return new DynamicRelation(leftOperand, joinType, (MTech.LLBLGen.Entities.EntityType)Enum.Parse(typeof(MTech.LLBLGen.Entities.EntityType), rightOperandEntityName, false), aliasRightOperand, onClause);
 		}
 
 		/// <inheritdoc/>
 		public override IDynamicRelation CreateDynamicRelation(string leftOperandEntityName, JoinHint joinType, string rightOperandEntityName, string aliasLeftOperand, string aliasRightOperand, IPredicate onClause)
 		{
-			return new DynamicRelation((MTech.Entities.EntityType)Enum.Parse(typeof(MTech.Entities.EntityType), leftOperandEntityName, false), joinType, (MTech.Entities.EntityType)Enum.Parse(typeof(MTech.Entities.EntityType), rightOperandEntityName, false), aliasLeftOperand, aliasRightOperand, onClause);
+			return new DynamicRelation((MTech.LLBLGen.Entities.EntityType)Enum.Parse(typeof(MTech.LLBLGen.Entities.EntityType), leftOperandEntityName, false), joinType, (MTech.LLBLGen.Entities.EntityType)Enum.Parse(typeof(MTech.LLBLGen.Entities.EntityType), rightOperandEntityName, false), aliasLeftOperand, aliasRightOperand, onClause);
 		}
 		
 		/// <inheritdoc/>
 		public override IDynamicRelation CreateDynamicRelation(IEntityFieldCore leftOperand, JoinHint joinType, string rightOperandEntityName, string aliasLeftOperand, string aliasRightOperand, IPredicate onClause)
 		{
-			return new DynamicRelation(leftOperand, joinType, (MTech.Entities.EntityType)Enum.Parse(typeof(MTech.Entities.EntityType), rightOperandEntityName, false), aliasLeftOperand, aliasRightOperand, onClause);
+			return new DynamicRelation(leftOperand, joinType, (MTech.LLBLGen.Entities.EntityType)Enum.Parse(typeof(MTech.LLBLGen.Entities.EntityType), rightOperandEntityName, false), aliasLeftOperand, aliasRightOperand, onClause);
 		}
 		
 		/// <inheritdoc/>
-		protected override IEntityFactoryCore GetFactoryImpl(int entityTypeValue) { return EntityFactoryFactory.GetFactory((MTech.Entities.EntityType)entityTypeValue); }
+		protected override IEntityFactoryCore GetFactoryImpl(int entityTypeValue) { return EntityFactoryFactory.GetFactory((MTech.LLBLGen.Entities.EntityType)entityTypeValue); }
 
 		/// <inheritdoc/>
 		protected override IEntityFactoryCore GetFactoryImpl(Type typeOfEntity) { return EntityFactoryFactory.GetFactory(typeOfEntity);	}

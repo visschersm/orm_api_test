@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 using System;
 
-namespace MTech.Entities
+namespace MTech.LLBLGen.Entities
 {
 
 
@@ -21,7 +21,9 @@ namespace MTech.Entities
 		///<summary>Dog</summary>
 		DogEntity,
 		///<summary>TodoItem</summary>
-		TodoItemEntity
+		TodoItemEntity,
+		///<summary>WeatherForecast</summary>
+		WeatherForecastEntity
 	}
 
 

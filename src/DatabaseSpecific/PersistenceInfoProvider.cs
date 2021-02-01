@@ -8,7 +8,7 @@
 using System;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.DatabaseSpecific
+namespace MTech.LLBLGen.Entities.DatabaseSpecific
 {
 	/// <summary>Singleton implementation of the PersistenceInfoProvider. This class is the singleton wrapper through which the actual instance is retrieved.</summary>
 	internal static class PersistenceInfoProviderSingleton
@@ -40,6 +40,7 @@ namespace MTech.Entities.DatabaseSpecific
 			InitCowEntityMappings();
 			InitDogEntityMappings();
 			InitTodoItemEntityMappings();
+			InitWeatherForecastEntityMappings();
 		}
 
 		/// <summary>Inits AnimalEntity's mappings</summary>
@@ -71,6 +72,16 @@ namespace MTech.Entities.DatabaseSpecific
 			this.AddElementMapping("TodoItemEntity", @"TodoList", @"dbo", "TodoItem", 2, 0);
 			this.AddElementFieldMapping("TodoItemEntity", "Id", "Id", false, "Int", 0, 10, 0, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0);
 			this.AddElementFieldMapping("TodoItemEntity", "Title", "Title", false, "VarChar", 128, 0, 0, false, "", null, typeof(System.String), 1);
+		}
+
+		/// <summary>Inits WeatherForecastEntity's mappings</summary>
+		private void InitWeatherForecastEntityMappings()
+		{
+			this.AddElementMapping("WeatherForecastEntity", @"WeatherForecast", @"dbo", "WeatherForecast", 4, 0);
+			this.AddElementFieldMapping("WeatherForecastEntity", "Date", "Date", true, "Date", 0, 0, 0, false, "", null, typeof(System.DateTime), 0);
+			this.AddElementFieldMapping("WeatherForecastEntity", "Id", "Id", false, "Int", 0, 10, 0, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 1);
+			this.AddElementFieldMapping("WeatherForecastEntity", "Summary", "Summary", true, "VarChar", 2147483647, 0, 0, false, "", null, typeof(System.String), 2);
+			this.AddElementFieldMapping("WeatherForecastEntity", "TemperatureC", "TemperatureC", true, "Int", 0, 10, 0, false, "", null, typeof(System.Int32), 3);
 		}
 
 	}

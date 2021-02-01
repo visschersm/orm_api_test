@@ -1,8 +1,8 @@
 ﻿using MTech.Domain;
 using MTech.Domain.Enums;
-using MTech.Entities.DatabaseSpecific;
-using MTech.Entities.EntityClasses;
-using MTech.Entities.Linq;
+using MTech.LLBLGen.Entities.DatabaseSpecific;
+using MTech.LLBLGen.Entities.EntityClasses;
+using MTech.LLBLGen.Entities.Linq;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using System.Collections.Generic;
 using System.Linq;

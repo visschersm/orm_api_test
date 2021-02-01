@@ -8,7 +8,7 @@
 using System;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.HelperClasses
+namespace MTech.LLBLGen.Entities.HelperClasses
 {
 	/// <summary>Field Creation Class for entity AnimalEntity</summary>
 	public partial class AnimalFields
@@ -54,6 +54,19 @@ namespace MTech.Entities.HelperClasses
 		public static EntityField2 Id { get { return ModelInfoProviderSingleton.GetInstance().CreateField2(TodoItemFieldIndex.Id); }}
 		/// <summary>Creates a new TodoItemEntity.Title field instance</summary>
 		public static EntityField2 Title { get { return ModelInfoProviderSingleton.GetInstance().CreateField2(TodoItemFieldIndex.Title); }}
+	}
+
+	/// <summary>Field Creation Class for entity WeatherForecastEntity</summary>
+	public partial class WeatherForecastFields
+	{
+		/// <summary>Creates a new WeatherForecastEntity.Date field instance</summary>
+		public static EntityField2 Date { get { return ModelInfoProviderSingleton.GetInstance().CreateField2(WeatherForecastFieldIndex.Date); }}
+		/// <summary>Creates a new WeatherForecastEntity.Id field instance</summary>
+		public static EntityField2 Id { get { return ModelInfoProviderSingleton.GetInstance().CreateField2(WeatherForecastFieldIndex.Id); }}
+		/// <summary>Creates a new WeatherForecastEntity.Summary field instance</summary>
+		public static EntityField2 Summary { get { return ModelInfoProviderSingleton.GetInstance().CreateField2(WeatherForecastFieldIndex.Summary); }}
+		/// <summary>Creates a new WeatherForecastEntity.TemperatureC field instance</summary>
+		public static EntityField2 TemperatureC { get { return ModelInfoProviderSingleton.GetInstance().CreateField2(WeatherForecastFieldIndex.TemperatureC); }}
 	}
 	
 

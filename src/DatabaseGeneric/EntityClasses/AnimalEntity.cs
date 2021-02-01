@@ -10,13 +10,13 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using MTech.Entities.HelperClasses;
-using MTech.Entities.FactoryClasses;
-using MTech.Entities.RelationClasses;
+using MTech.LLBLGen.Entities.HelperClasses;
+using MTech.LLBLGen.Entities.FactoryClasses;
+using MTech.LLBLGen.Entities.RelationClasses;
 
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
-namespace MTech.Entities.EntityClasses
+namespace MTech.LLBLGen.Entities.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
@@ -42,7 +42,7 @@ namespace MTech.Entities.EntityClasses
 		{
 			public AnimalEntityStaticMetaData()
 			{
-				SetEntityCoreInfo("AnimalEntity", InheritanceHierarchyType.TargetPerEntity, false, (int)MTech.Entities.EntityType.AnimalEntity, typeof(AnimalEntity), typeof(AnimalEntityFactory), false);
+				SetEntityCoreInfo("AnimalEntity", InheritanceHierarchyType.TargetPerEntity, false, (int)MTech.LLBLGen.Entities.EntityType.AnimalEntity, typeof(AnimalEntity), typeof(AnimalEntityFactory), false);
 			}
 		}
 
@@ -159,7 +159,7 @@ namespace MTech.Entities.EntityClasses
 	}
 }
 
-namespace MTech.Entities
+namespace MTech.LLBLGen.Entities
 {
 	public enum AnimalFieldIndex
 	{
@@ -174,7 +174,7 @@ namespace MTech.Entities
 	}
 }
 
-namespace MTech.Entities.RelationClasses
+namespace MTech.LLBLGen.Entities.RelationClasses
 {
 	/// <summary>Implements the relations factory for the entity: Animal. </summary>
 	public partial class AnimalRelations: RelationFactory

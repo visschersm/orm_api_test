@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using SD.LLBLGen.Pro.DQE.SqlServer;
 
-namespace MTech.Entities.DatabaseSpecific
+namespace MTech.LLBLGen.Entities.DatabaseSpecific
 {	
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
