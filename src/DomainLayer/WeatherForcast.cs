@@ -4,12 +4,10 @@ namespace MTech.Domain
 {
     public class WeatherForecast
     {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-        public string Summary { get; set; }
+        public virtual int Id { get; set; }
+        public virtual DateTime Date { get; set; }
+        public virtual int TemperatureC { get; set; }
+        public virtual int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public virtual string Summary { get; set; }
     }
 }

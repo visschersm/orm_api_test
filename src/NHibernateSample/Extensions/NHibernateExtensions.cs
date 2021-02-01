@@ -3,15 +3,17 @@ using MTech.NHibernateSample.Contexts;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Mapping.ByCode;
+using System;
 
 namespace MTech.NHibernateSample
 {
     public static class NHibernateExtensions
     {
-        public static IServiceCollection AddNHibernate(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddNHibernate(this IServiceCollection services, string connectionString, params Type[] mappingTypes)
         {
             var mapper = new ModelMapper();
-            mapper.AddMappings(typeof(NHibernateExtensions).Assembly.ExportedTypes);
+            mapper.AddMappings(mappingTypes);
+
             HbmMapping domainMapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
             var configuration = new Configuration();
@@ -24,6 +26,7 @@ namespace MTech.NHibernateSample
                 c.LogFormattedSql = true;
                 c.LogSqlInConsole = true;
             });
+
             configuration.AddMapping(domainMapping);
 
             var sessionFactory = configuration.BuildSessionFactory();

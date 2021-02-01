@@ -4,8 +4,8 @@ namespace MTech.Domain
 {
     public class Animal
     {
-        public int Id { get; set; }
-        public AnimalType Type { get; set; }
-        public string Name { get; set; }
+        public virtual int Id { get; set; }
+        public virtual AnimalType Type { get; set; }
+        public virtual string Name { get; set; }
     }
 }

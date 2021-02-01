@@ -2,6 +2,7 @@
 using MTech.Entities.DatabaseSpecific;
 using MTech.Entities.EntityClasses;
 using MTech.Entities.Linq;
+using SD.LLBLGen.Pro.ORMSupportClasses;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,13 +21,15 @@ namespace MTech.LLBLGenSample
 
         public void Delete(int id)
         {
-            using var adapter = new DataAccessAdapter();
+            var connectionString = RuntimeConfiguration.GetConnectionString("TodoContext");
+            using var adapter = new DataAccessAdapter(connectionString);
             adapter.DeleteEntity(new TodoItemEntity { Id = id });
         }
 
         public IList<TodoItem> GetAll()
         {
-            using var adapter = new DataAccessAdapter();
+            var connectionString = RuntimeConfiguration.GetConnectionString("TodoContext");
+            using var adapter = new DataAccessAdapter(connectionString);
             var metaData = new LinqMetaData(adapter);
             return metaData.TodoItem.Select(item => new TodoItem
             {
@@ -37,7 +40,8 @@ namespace MTech.LLBLGenSample
 
         public TodoItem GetById(int id)
         {
-            using var adapter = new DataAccessAdapter();
+            var connectionString = RuntimeConfiguration.GetConnectionString("TodoContext");
+            using var adapter = new DataAccessAdapter(connectionString);
             var metaData = new LinqMetaData(adapter);
             return metaData.TodoItem.Where(item => item.Id == id)
                 .Select(item => new TodoItem
@@ -49,7 +53,8 @@ namespace MTech.LLBLGenSample
 
         public void Update(int id, TodoItem item)
         {
-            using var adapter = new DataAccessAdapter();
+            var connectionString = RuntimeConfiguration.GetConnectionString("TodoContext");
+            using var adapter = new DataAccessAdapter(connectionString);
             var entity = new TodoItemEntity { Id = id };
             adapter.FetchEntity(entity);
             entity.Title = item.Title;

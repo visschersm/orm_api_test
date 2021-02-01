@@ -18,7 +18,7 @@ namespace MTech.NHibernateSample.Mapping
 
             Property(x => x.Name, x =>
             {
-                x.Column(y => y.SqlType("varchar(64)"));
+                x.Column(y => y.SqlType("nvarchar(64)"));
             });
 
             Property(x => x.Type, x =>
@@ -34,16 +34,6 @@ namespace MTech.NHibernateSample.Mapping
         public DogMapping()
         {
             Id(x => x.Id);
-            Property(x => x.Name, x =>
-            {
-                x.Column(y => y.SqlType("varchar(64)"));
-            });
-
-            Property(x => x.Type, x =>
-            {
-                x.Column("Type");
-                x.Type(NHibernateUtil.Int32);
-            });
         }
     }
 
@@ -52,16 +42,6 @@ namespace MTech.NHibernateSample.Mapping
         public CowMapping()
         {
             Id(x => x.Id);
-            Property(x => x.Name, x =>
-            {
-                x.Column(y => y.SqlType("varchar(64)"));
-            });
-
-            Property(x => x.Type, x =>
-            {
-                x.Column("Type");
-                x.Type(NHibernateUtil.Int32);
-            });
         }
     }
 }

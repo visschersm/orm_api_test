@@ -8,25 +8,23 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MTech;
 using MTech.NHibernateSample;
+using MTech.NHibernateSample.Mapping;
 using SD.LLBLGen.Pro.DQE.SqlServer;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-namespace TodoApi
+namespace TestApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _env = env;
         }
 
         public IConfiguration Configuration { get; }
-
-        private readonly IWebHostEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,18 +41,24 @@ namespace TodoApi
                     services.AddScoped<IAnimalService>(implementationFactory => new MTech.DapperSample.AnimalService(new SqlConnection(animalFarmConnectionString)));
                     break;
                 case "EFCore":
+
+                    services.AddDbContext<MTech.EFSample.WeatherContext>(options =>
+                    {
+                        options.UseSqlServer(connectionString);
+                    });
+
+                    services.AddScoped<IWeatherService, MTech.EFSample.WeatherService>();
+
                     services.AddDbContext<MTech.EFSample.TodoContext>(options =>
                     {
                         options.UseSqlServer(todoListConnectionString);
                     });
-
                     services.AddScoped<ITodoService, MTech.EFSample.TodoService>();
 
                     services.AddDbContext<MTech.EFSample.AnimalContext>(options =>
                     {
                         options.UseSqlServer(animalFarmConnectionString);
                     });
-
                     services.AddScoped<IAnimalService, MTech.EFSample.AnimalService>();
                     break;
                 case "Linq2Db":
@@ -70,12 +74,6 @@ namespace TodoApi
                     });
                     services.AddScoped<IAnimalService, MTech.LinqToDBSample.AnimalService>();
                     break;
-                case "NHibernate":
-                    services.AddNHibernate(todoListConnectionString);
-                    services.AddNHibernate(animalFarmConnectionString);
-                    services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
-                    services.AddScoped<IAnimalService, MTech.NHibernateSample.AnimalService>();
-                    break;
                 case "LLBLGen":
                     RuntimeConfiguration.AddConnectionString("TodoContext", todoListConnectionString);
                     RuntimeConfiguration.AddConnectionString("AnimalContext", animalFarmConnectionString);
@@ -86,6 +84,17 @@ namespace TodoApi
 
                     services.AddScoped<ITodoService, MTech.LLBLGenSample.TodoService>();
                     services.AddScoped<IAnimalService, MTech.LLBLGenSample.AnimalService>();
+                    break;
+                case "NHibernate":
+                    services.AddNHibernate(connectionString, typeof(WeatherMapping));
+                    services.AddNHibernate(todoListConnectionString, typeof(TodoItemMapping));
+                    services.AddNHibernate(animalFarmConnectionString,
+                        typeof(AnimalMapping),
+                        typeof(DogMapping),
+                        typeof(CowMapping));
+                    services.AddScoped<IWeatherService, MTech.NHibernateSample.WeatherService>();
+                    services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
+                    services.AddScoped<IAnimalService, MTech.NHibernateSample.AnimalService>();
                     break;
             }
 
