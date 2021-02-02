@@ -25,6 +25,7 @@
     <ProjectReference Include="..\DapperSample\DapperSample.csproj" />
     <ProjectReference Include="..\EFSample\EFSample.csproj" />
     <ProjectReference Include="..\LinqToDBSample\LinqToDBSample.csproj" />
+    <ProjectReference Include="..\SQLSample\SQLSample.csproj" />
   </ItemGroup>
 
 </Project>

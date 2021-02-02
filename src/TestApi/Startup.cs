@@ -104,6 +104,11 @@ namespace TestApi
                     services.AddScoped<ITodoService, MTech.NHibernateSample.TodoService>();
                     services.AddScoped<IAnimalService, MTech.NHibernateSample.AnimalService>();
                     break;
+                case "SQL":
+                    services.AddScoped<IWeatherService>(impl => new MTech.SQLSample.WeatherService(new SqlConnection(connectionString)));
+                    services.AddScoped<ITodoService>(impl => new MTech.SQLSample.TodoService(new SqlConnection(todoListConnectionString)));
+                    services.AddScoped<IAnimalService>(impl => new MTech.SQLSample.AnimalService(new SqlConnection(animalFarmConnectionString)));
+                    break;
             }
 
             services.AddControllers();

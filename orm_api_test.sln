@@ -23,13 +23,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTech.Entities", "..\..\..\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FA70FF5D-CACD-404E-8B20-AD03E648F32A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLBLGenSampleTests", "test\LLBLGenSampleTests\LLBLGenSampleTests.csproj", "{F2E21386-9CA6-4EC3-ABC9-8827B3B88F27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LLBLGenSampleTests", "test\LLBLGenSampleTests\LLBLGenSampleTests.csproj", "{F2E21386-9CA6-4EC3-ABC9-8827B3B88F27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApi.IntegrationTests", "test\TestApi.IntegrationTests\TestApi.IntegrationTests.csproj", "{C1F9276D-9A07-4606-B08B-A6113273537C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApi.IntegrationTests", "test\TestApi.IntegrationTests\TestApi.IntegrationTests.csproj", "{C1F9276D-9A07-4606-B08B-A6113273537C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTech.LLBLGen.Entities", "src\DatabaseGeneric\MTech.LLBLGen.Entities.csproj", "{EB82886F-FB27-4E88-ABF0-7362085923C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTech.LLBLGen.EntitiesDBSpecific", "src\DatabaseSpecific\MTech.LLBLGen.EntitiesDBSpecific.csproj", "{33CB0FF4-1F49-4CC2-92E4-23CFB4ABE8BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLSample", "src\SQLSample\SQLSample.csproj", "{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{497F8C8D-1DC2-4A43-B1AB-EC52DD4F14F2}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,6 +204,18 @@ Global
 		{33CB0FF4-1F49-4CC2-92E4-23CFB4ABE8BD}.Release|x64.Build.0 = Release|Any CPU
 		{33CB0FF4-1F49-4CC2-92E4-23CFB4ABE8BD}.Release|x86.ActiveCfg = Release|Any CPU
 		{33CB0FF4-1F49-4CC2-92E4-23CFB4ABE8BD}.Release|x86.Build.0 = Release|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Debug|x64.Build.0 = Debug|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Debug|x86.Build.0 = Debug|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Release|x64.ActiveCfg = Release|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Release|x64.Build.0 = Release|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF8D5C39-FA29-47A8-9C00-5D6B0E17BE81}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
